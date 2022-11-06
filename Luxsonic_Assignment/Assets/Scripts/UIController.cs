@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
@@ -11,7 +11,17 @@ public class UIController : MonoBehaviour
     public GameObject SettingsPanel;
     public GameObject Panel;
     public GameObject ErrorPanel;
+    public GameObject AttemptsText;
 
+    void Start()
+    {
+        InstructionsPanel.gameObject.SetActive(false);
+        IntroductionPanel.gameObject.SetActive(true);
+        Panel.gameObject.SetActive(true);
+        ErrorPanel.gameObject.SetActive(false);
+        SettingsPanel.gameObject.SetActive(false);
+        AttemptsText.gameObject.SetActive(false);
+    }
 
     public void LoadSettingPanel()
     {
@@ -20,6 +30,7 @@ public class UIController : MonoBehaviour
         Panel.gameObject.SetActive(false);
         ErrorPanel.gameObject.SetActive(false);
         SettingsPanel.gameObject.SetActive(true);
+        AttemptsText.gameObject.SetActive(true);
     }
 
     public void LoadInstructionPanel()
@@ -29,34 +40,36 @@ public class UIController : MonoBehaviour
         IntroductionPanel.gameObject.SetActive(false);
         Panel.gameObject.SetActive(true);
         ErrorPanel.gameObject.SetActive(false);
+        AttemptsText.gameObject.SetActive(true);
     }
 
-    public void LoadIntroductionPanel()
-    {
-        InstructionsPanel.gameObject.SetActive(false);
-        IntroductionPanel.gameObject.SetActive(false);
-        Panel.gameObject.SetActive(false);
-        ErrorPanel.gameObject.SetActive(false);
-        SettingsPanel.gameObject.SetActive(true);
-    }
     public void LoadClosePanel()
     {
         InstructionsPanel.gameObject.SetActive(false);
         IntroductionPanel.gameObject.SetActive(false);
-        Panel.gameObject.SetActive(false);
+        Panel.gameObject.SetActive(true);
         ErrorPanel.gameObject.SetActive(false);
         SettingsPanel.gameObject.SetActive(false);
+        AttemptsText.gameObject.SetActive(true);
+    }
+    public void LoadScene()
+    {
+        SceneManager.LoadScene(0);
     }
 
-            /*    if()
-            {
-                public void LoadErrorPanel()
-                {
-                    InstructionsPanel.gameObject.SetActive(false);
-                    IntroductionPanel.gameObject.SetActive(false);
-                    Panel.gameObject.SetActive(false);
-                    ErrorPanel.gameObject.SetActive(true);
-                    SettingsPanel.gameObject.SetActive(false);
-                }
-            */
+    public void Quit()
+    {
+        Application.Quit();
+    }
+    /*    if()
+    {
+        public void LoadErrorPanel()
+        {
+            InstructionsPanel.gameObject.SetActive(false);
+            IntroductionPanel.gameObject.SetActive(false);
+            Panel.gameObject.SetActive(false);
+            ErrorPanel.gameObject.SetActive(true);
+            SettingsPanel.gameObject.SetActive(false);
         }
+    */
+}

@@ -6,23 +6,154 @@ using UnityEngine.SceneManagement;
 public class Process : MonoBehaviour
 {
 
-    public GameObject GloveBox;
-    public GameObject Vial;
-    public GameObject Injection;
-    //  public GameObject Glove;
-    // public Transform GloveBoxPosition;
-    // public Transform InjectionPosition;
-    //  public Transform VialPosition;
-    //  public Transform GlovePosition;
+    private float timer = 1;
+  
+    public GameObject[] functions; 
+    public GameObject Glove;
+   
+    int randomInt;
+    int i = 0;
 
-    private int counter = 0;
     void Start()
     {
-        GameObject C = Instantiate(GloveBox, GloveBox.transform.position, Quaternion.identity);
-        GameObject E = Instantiate(Vial, Vial.transform.position, Quaternion.identity);
-        GameObject K = Instantiate(Injection, Injection.transform.position, Quaternion.identity);
+        StartCoroutine(testEnumerator(timer));
     }
-    /*void OnTriggerEnter(Collider other)
+
+    private IEnumerator testEnumerator(float delay)
+    {
+        List<int> randomList = new List<int>();
+        while (i<3)
+        {
+            int NewNumber()
+            {
+                do
+                {
+                    System.Random a = new System.Random();
+                    randomInt = a.Next(0, 3);
+
+                } while (randomList.Contains(randomInt));
+
+                randomList.Add(randomInt);
+                return randomInt;
+            }
+
+                int RN = NewNumber();
+
+            Instantiate(functions[RN], functions[RN].transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(delay);
+          i++;
+       }
+    }
+
+    void Update()
+    {
+     
+    }
+}
+/*while (currentIndex < functions.Length)
+{
+    int randomIndex = Random.Range(currentIndex, functions.Length);
+
+    string current = functions[currentIndex];
+    string random = functions[randomIndex];
+
+    functions[currentIndex] = random;
+    functions[randomIndex] = current;
+
+    if (currentIndex != 0)
+    {
+        if (functions[currentIndex] != functions[currentIndex - 1])
+            currentIndex += 1;
+    }
+    else
+    {
+        currentIndex += 1;
+    }
+}
+
+for (int i = 0; i < functions.Length; ++i)
+    Invoke(functions[i], 2.0f * (i + 1));*/
+
+/*  public float SpawnTime = 0.0f;
+
+  void Start()
+  {
+    float x = Random.Range(1.0f, 3.0f);
+    if (SpawnTime < 3.0f)
+      {
+          if (x == 1.0f)
+          {
+              InvokeRepeating("SpawnGloveBox", SpawnTime, SpawnTime);
+          }
+          if (x == 2.0f)
+          {
+              InvokeRepeating("SpawnVial", SpawnTime, SpawnTime);
+          }
+          if (x == 3.0f)
+          {
+              InvokeRepeating("SpawnInjection", SpawnTime, SpawnTime);
+          }
+      }
+  }
+  void SpawnGloveBox()
+  {
+      Instantiate(GloveBox, GloveBox.transform.position, Quaternion.identity);
+      SpawnTime += 1;
+  }
+  void SpawnVial()
+  {
+      Instantiate(Vial, Vial.transform.position, Quaternion.identity);
+      SpawnTime += 1;
+  }
+  void SpawnInjection()
+  {
+      Instantiate(Injection, Injection.transform.position, Quaternion.identity);
+      SpawnTime += 1;
+  }
+}
+*/
+
+
+
+
+
+
+/*
+    public Transform[] SpawnPoints;
+    public Transform[] EffectPoints;
+
+
+    public float spawnTime = 1.5f;
+    public float effectSpawnTime = 1f;
+
+    public GameObject Coins;
+    public GameObject Effect;
+
+    int spawnIndex = 0;
+    int maximumRandomRange = 0;
+    // Use this for initialization
+    void Start()
+    {
+        //Initialize the variable
+        spawnIndex = Random.Range(0, maximumRandomRange);
+        maximumRandomRange = SpawnPoints.Length; //or EffectPoints.Length, as they got the same
+
+        InvokeRepeating("SpawnParticle", effectSpawnTime, effectSpawnTime);
+        InvokeRepeating("SpawnCoins", spawnTime, spawnTime);
+    }
+
+    void SpawnCoins()
+    {
+        Instantiate(Coins, SpawnPoints[spawnIndex].position, SpawnPoints[spawnIndex].rotation);
+    }
+    void SpawnParticle()
+    {
+        spawnIndex = Random.Range(0, maximumRandomRange); //You only need to call it here again, as it is the function which is called faster
+        Instantiate(Effect, EffectPoints[spawnIndex].position, EffectPoints[spawnIndex].rotation);
+    }
+
+}
+void OnTriggerEnter(Collider other)
     {
         GameObject C = Instantiate(GloveBox, transform.position, Quaternion.identity);
         GameObject E = Instantiate(Vial, transform.position, Quaternion.identity);
@@ -50,18 +181,14 @@ public class Process : MonoBehaviour
                    CancelInvoke();
                    counter = 0;
                }*/
-    //}
-    /* public void Load()
+//}
+/* public void Load()
+ {
+     if (counter == 6)
      {
-         if (counter == 6)
-         {
-             SceneManager.LoadScene(1);
-         }
-     }*/
-    // Start is called before the first frame update
+         SceneManager.LoadScene(1);
+     }
+ }*/
+// Start is called before the first frame update
 
-}    // Update is called once per frame
-   /*void Update()
-    {
-        
-    }*/
+//}    // Update is called once per frame
