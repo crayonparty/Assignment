@@ -1,25 +1,120 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
-public class Controller : MonoBehaviour  //, Interactible
+public class Controller : MonoBehaviour
 {
-   /* int[] Correct = {0,0,0,0};
-    int success = 0;
-    int wrong = 0;
+    int[] Correct = { 0, 0, 0, 0 };
     public GameObject ErrorPanel;
     public GameObject GloveWorn;
-    public GameObject Glove;
-    int i = 4;
+    int i = 0;
     bool hasJoint;
-    public Controller controller;
 
-    private Interactable interactable;
-    public bool isGrabbed = false;
+    void OnCollisionEnter(Collision collider)
+    {
+        if (collider.gameObject.name == "GloveBox")
+        {
+            Instantiate(GloveWorn, GloveWorn.transform.position, Quaternion.identity);
+            if (collider.gameObject.GetComponent<Rigidbody>() != null && !hasJoint)
+            {
+                gameObject.AddComponent<FixedJoint>();
+                gameObject.GetComponent<FixedJoint>().connectedBody = collider.gameObject.GetComponent<Rigidbody>();
+                hasJoint = true;
+            }
+            print("Glove is worn");
 
-    void OnCollisionEnter(Collision collision)
+        }
+    }
+    public int check()
+    {
+        if (hasJoint == true)
+        {
+            Correct[i] = 1;
+            return Correct[i];
+        }
+        return 0;
+    }
+    void Start()
+    {
+
+    }
+}
+    //bool hasJoint;
+    // public Controller controller;
+
+    // Interactable interactable;
+    /*public bool isGrabbed = false;
+    private XRDirectInteractor interactor = null;
+    public bool IsGrabbing;
+
+    private void Awake()
+    {
+
+        interactor = GetComponent<XRDirectInteractor>();
+        IsGrabbing = false;
+
+    }
+
+    private void OnEnable()
+    {
+
+        interactor.onSelectEntered.AddListener(TakeInput);
+        interactor.onSelectExited.AddListener(StopInput);
+
+    }
+
+    private void OnDisable()
+    {
+
+        interactor.onSelectEntered.RemoveListener(TakeInput);
+        interactor.onSelectExited.RemoveListener(StopInput);
+
+    }
+
+    private void TakeInput(XRBaseInteractable interactable)
+    {
+
+        IsGrabbing = true;
+        Debug.Log("is grabbing");
+
+    }
+
+    private void StopInput(XRBaseInteractable interactable)
+    {
+
+        IsGrabbing = false;
+        Debug.Log("is releasing");
+
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        Gloves();
+        if (interactable != null)
+        {
+            isGrabbed = true;
+        }
+    }
+
+    void Gloves()
+    {
+        OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger, controller);
+        OVRInput.Get(OVRInput.Button.One, controller);
+
+        if (OVRInput.GetDown(OVRInput.RawButton.Y))
+        {
+            Debug.Log("A button pressed");
+        }
+        else (OVRInput.Get(OVRInput.Button.Up))
+         {
+            Debug.Log("A button is not pressed");
+            Instantiate(GloveWorn, GloveWorn.transform.position, Quaternion.identity);
+        }
+        Correct[i] = 1;
+        i++;
+    }
+
+    /*  void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.GetComponent<Rigidbody>() != null && !hasJoint)
         {
@@ -34,7 +129,7 @@ public class Controller : MonoBehaviour  //, Interactible
     void OnCollisionExit(Collision other)
     {
         //Destroy(GetComponent (FixedJoint));
-          
+
             var Container = gameObject.GetComponent<FixedJoint>();
             if (other.gameObject.GetComponent<Rigidbody>() != null && hasJoint == true)
             {
@@ -44,7 +139,7 @@ public class Controller : MonoBehaviour  //, Interactible
         print("No longer in contact with + other.transform.name");
         Correct[i] = 3;
         i++;
-    }
+    }*/
     /* void OnCollisionEnter(Collision collision)
      {
          Vial.transform.parent = Injection.transform;
@@ -53,53 +148,3 @@ public class Controller : MonoBehaviour  //, Interactible
 
 
     // Start is called before the first frame update
-   /* void Start()
-    {
-        interactable = this.GetComponent<Interactable>();
-
-        for (int i = 0; i < 4; i++)
-        {
-            if (!(Correct[i] == { 1, 2, 3, 4 })
-            {
-                ErrorPanel.SetActive(true);
-                wrong++;
-            }
-            else
-            {
-                success++;
-                SceneManager.LoadScene(0);
-            }
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    Gloves();
-        if (interactable != null)
-        {
-            isGrabbed = true;
-        }
-    }*/
-
-  /*  void Gloves()
-    {
-
-    OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger, controller);
-    OVRInput.Get(OVRInput.Button.One, controller);
-
-    if (OVRInput.GetDown(OVRInput.RawButton.Y))
-         {
-             Instantiate(Glove, Glove.transform.position, Quaternion.identity);
-             Debug.Log("A button pressed");
-         }
-         else (OVRInput.Get(OVRInput.Button.Up))
-         {
-             Debug.Log("A button is not pressed");
-             Instantiate(GloveWorn, GloveWorn.transform.position, Quaternion.identity);
-         }
-         Correct[i] = 1;
-         i++;
-}
-}*/
-    }
